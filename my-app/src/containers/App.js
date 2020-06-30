@@ -1,6 +1,7 @@
 import React ,{useState}from 'react';
 import './App.css';
-import {Profile} from './Employee/profile';
+import  ProfileData  from '../components/Employee/profiledata';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 function App() {
   //useState
@@ -27,6 +28,7 @@ function App() {
   };
   //SetState
   const setUserProfile = () =>{
+    //let doesTitle = true;
     hideProfile({
       show: true
     })
@@ -34,7 +36,6 @@ function App() {
 //Onchanged event for two way binding
 
 const nameChangeHandler = (event,id) => {
-  debugger;
  
 const profileIndex = profileUser.Person.findIndex(p =>{
   return p.id === id;
@@ -63,25 +64,15 @@ setUser({Person: perUser});
   if(showProfile.show){
     person = (
         <div className="row row-cols-1 row-cols-md-2 g-4">
-            {profileUser.Person.map((data,index) =>{
-              return <Profile
-                            click={deleteUser.bind(this,index)}
-                            name={data.name}
-                            cardtitle={data.cardtitle}
-                            age={data.age}
-                            delete={data.delete}
-                            id={data.id}
-                            key={data.id} 
-                            changed={(event) => nameChangeHandler(event,data.id)}>
-                      </Profile>
-            })
-          }
+          <ProfileData 
+          person={profileUser}
+          Clicked={deleteUser}
+          Changed={(event) => nameChangeHandler(event,person.id)}></ProfileData>
       </div>)
   }
     return (
-
       <div className="App">
-        <button className="btn btn-danger" onClick={setUserProfile}>Set Profile</button>
+        <Cockpit clickUser={setUserProfile}></Cockpit>
           <div style={styleData}>
             {person}
           </div>
