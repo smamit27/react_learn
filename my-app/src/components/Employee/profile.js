@@ -1,18 +1,22 @@
-import React from 'react';
+import React,{Component} from 'react';
+import './profile.scss';
 
-function Profile (props) {
+class Profile extends Component{
+
+  render(){
   return(
-    <div className="col">
-      <div className="card">
-                    <div className="card-body">
-                      <h5 className="card-title">{props.cardtitle} :: {props.id}</h5>
-                      <input type="text" value={props.name} onChange={props.changed} /> 
-                      <p className="card-text">{props.name} {props.age}</p>
-                      <button className="btn btn-primary" onClick={props.click}>{props.delete}</button>
+        <div className="col">
+          <div className="card">
+                        <div className="card-body">
+                          <h5 className="card-title">{this.props.cardtitle} :: {this.props.id}</h5>
+                          <input type="text" value={this.props.name} onChange={this.props.changed} /> 
+                          <p className="card-text">{this.props.name} {this.props.age}</p>
+                          <button className="btn btn-primary" onClick={this.props.click}>{this.props.delete}</button>
 
-                    </div>
-      </div>
-      </div>
-    )
+                        </div>
+          </div>
+          </div>
+        )
+    }
 }
 export {Profile}

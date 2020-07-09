@@ -1,6 +1,11 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 
 function Cockpit(props) {
+  useEffect(()=>{
+   setTimeout(()=>{
+     alert("Hello India");
+   },1000); 
+  },[props.clickUser])
     return(
         <div>
         <h1 className="text-center">Portal App</h1>
@@ -9,4 +14,4 @@ function Cockpit(props) {
     )
 }
 
-export default Cockpit;
+export  {Cockpit};
