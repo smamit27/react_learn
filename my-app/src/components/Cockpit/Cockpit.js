@@ -1,17 +1,31 @@
-import React,{useEffect} from 'react';
+import React,{useEffect, useRef} from 'react';
+import Aux from '../../hoc/Aux'
 
 function Cockpit(props) {
+  const toggleButton = useRef(null);
+
   useEffect(()=>{
-   setTimeout(()=>{
-     alert("Hello India");
-   },1000); 
-  },[props.clickUser])
+  //  setTimeout(()=>{
+  //    alert("Hello India");
+  //  },10);
+  toggleButton.current.click();
+   return () =>{
+     console.log("cleanup cockpil 1")
+   } 
+  },[]);
+  useEffect(()=>{
+    console.log("cleanup cockpil 2");
+    return () =>{
+      console.log("cleanup cockpil return 2")
+    }
+    });
     return(
-        <div>
-        <h1 className="text-center">Portal App</h1>
-        <button className="btn btn-danger" onClick={props.clickUser}>Set Profile</button>
-      </div>
+        <Aux>
+        <h1 className="text-center">{props.title}</h1>
+        <button ref={toggleButton} className="btn btn-danger" onClick={props.clickUser}>Set Profile</button>
+        <button className="btn btn-primary" onClick={props.login}>Login</button>
+      </Aux>
     )
 }
 
-export  {Cockpit};
+export default React.memo(Cockpit);

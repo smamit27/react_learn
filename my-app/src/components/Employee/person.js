@@ -1,27 +1,35 @@
-import React,{Component} from 'react';
-import {Profile} from './profile';
-class Person extends Component{
+import React,{PureComponent} from 'react';
+import Profile from './profile';
+class Person extends PureComponent{
 
   // static getDerivedStateFromProps(props,state){
   //   console.log("Person getDerivedStateFromProps")
   //   return state;
   // }
-  shouldComponentUpdate(nextProps,nextState){
-    console.log("Person shouldComponentUpdate")
-
-    return true;
-  }
+  // shouldComponentUpdate(nextProps,nextState){
+  //   console.log("Person shouldComponentUpdate")
+  //   if(nextProps.person.Person !== this.props.person.Person){
+  //     return true
+  //   }
+  //   else{
+  //     return false;
+  //   }
+  // }
   getSnapshotBeforeUpdate(prevProps,prevState){
-    console.log('getSnapshotBeforeUpdate');
+    console.log('Person getSnapshotBeforeUpdate');
     return {message: 'hello Indisa'}
   }
   componentDidUpdate(prevProps,prevState,snapshot){
-    console.log('componentDidUpdate'+ snapshot.message);
+    console.log('Person componentDidUpdate'+ snapshot.message);
+
+  }
+  componentWillUnmount(){
+    console.log('Person componentWillUnmount');
 
   }
   render(){
     return this.props.person.Person.map((person,index) =>{
-      console.log('Profiledata');
+      console.log('Person array ');
         return <Profile
                       click={()=>this.props.Clicked(index)}
                       name={person.name}
@@ -29,7 +37,8 @@ class Person extends Component{
                       age={person.age}
                       delete={person.delete}
                       id={person.id}
-                      key={person.id} 
+                      key={person.id}
+                      isAuth = {this.props.isAuthenticated} 
                       changed={(event) => this.props.changed(event,person.id)}>
                 </Profile>
       });
@@ -38,4 +47,4 @@ class Person extends Component{
 
 
 
-export {Person};
+export default Person;
